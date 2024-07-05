@@ -44,7 +44,7 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/public").permitAll() // it means every user can access to /public endpoint
-                        .requestMatchers("/private").hasRole("USER") // it means the users who have USER role can access to /admin endpoint
+                        .requestMatchers("/private").hasRole("USER") // it means the users who have USER role can access to /private endpoint
                         .requestMatchers("/admin").hasRole("ADMIN") // it means the users who have ADMIN role can access to /admin endpoint
                         .anyRequest().authenticated() // For other every endpoints authentication is required
                 )
