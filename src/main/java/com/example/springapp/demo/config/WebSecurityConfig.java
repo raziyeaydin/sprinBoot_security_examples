@@ -43,10 +43,14 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/public").permitAll() // it means every user can access to /public endpoint
-                        .requestMatchers("/private").hasRole("USER") // it means the users who have USER role can access to /private endpoint
-                        .requestMatchers("/admin").hasRole("ADMIN") // it means the users who have ADMIN role can access to /admin endpoint
-                        .anyRequest().authenticated() // For other every endpoints authentication is required
+                        // it means /public endpoint is not required any authentication(we can use "no auth" as Auth Type in postman)
+                        .requestMatchers("/public").permitAll()
+                        // it means the users who have USER role can access to /private endpoint
+                        .requestMatchers("/private").hasRole("USER")
+                        // it means the users who have ADMIN role can access to /admin endpoint
+                        .requestMatchers("/admin").hasRole("ADMIN")
+                        // For other every endpoints authentication is required. It means every user can reach the other endpoints
+                        .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults()) // HTTP Basic Auth
                 .csrf((csrf) -> csrf.disable()); // deactivate CSRF protection (generally for REST APIs)

@@ -21,4 +21,10 @@ public class HelloController {
         return "This is an admin endpoint";
     }
 
+    @GetMapping("/internal")
+    public String internalEndpoint() {
+        //To reach this endpoint, you need to authenticate with any user-password
+        return "This is an internal endpoint";
+    }
+
 }
